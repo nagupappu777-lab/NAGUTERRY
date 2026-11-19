@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nagu | Mathematics Teacher</title>
+<meta name="description" content="Nagu – dedicated and passionate Mathematics Teacher simplifying complex concepts for students.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lavender-50:#faf7ff;
+    --lavender-100:#f3edff;
+    --lavender-200:#e6dcfb;
+    --lavender-300:#d4c2f7;
+    --purple-400:#b79cf0;
+    --purple-500:#9b7ce0;
+    --purple-600:#7c5cc4;
+    --purple-800:#4a3578;
+    --ink:#3b2d5c;
+    --muted:#7d71a0;
+    --card:rgba(255,255,255,.72);
+    --shadow:0 10px 40px rgba(124,92,196,.15);
+    --radius:22px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Poppins',sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 10% 0%, var(--lavender-200) 0, transparent 40%),
+      radial-gradient(circle at 90% 30%, #eadcff 0, transparent 35%),
+      radial-gradient(circle at 20% 80%, var(--lavender-100) 0, transparent 40%),
+      var(--lavender-50);
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+  /* floating math symbols */
+  .floaters{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  .floaters span{
+    position:absolute;font-family:'Playfair Display',serif;color:var(--purple-400);
+    opacity:.18;animation:float 18s ease-in-out infinite;
+  }
+  @keyframes float{
+    0%,100%{transform:translateY(0) rotate(0)}
+    50%{transform:translateY(-30px) rotate(12deg)}
+  }
+  a{color:inherit;text-decoration:none}
+  section{position:relative;z-index:1;padding:90px 8%}
+  h2.title{
+    font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--purple-800);
+    margin-bottom:12px;text-align:center;
+  }
+  .title-line{width:70px;height:4px;border-radius:4px;margin:0 auto 50px;
+    background:linear-gradient(90deg,var(--purple-400),var(--lavender-300));}
+
+  /* NAV */
+  nav{
+    position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;
+    display:flex;gap:6px;padding:8px 12px;border-radius:50px;
+    background:rgba(255,255,255,.7);backdrop-filter:blur(14px);
+    box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.8);
+  }
+  nav a{padding:8px 18px;border-radius:40px;font-size:.85rem;font-weight:500;color:var(--muted);transition:.25s}
+  nav a:hover,nav a.active{background:linear-gradient(135deg,var(--purple-500),var(--purple-400));color:#fff}
+
+  /* HERO */
+  #home{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:120px}
+  .hero-badge{
+    display:inline-block;padding:6px 18px;border-radius:40px;font-size:.8rem;letter-spacing:.12em;
+    text-transform:uppercase;background:var(--lavender-200);color:var(--purple-600);font-weight:500;margin-bottom:22px;
+  }
+  .avatar{
+    width:140px;height:140px;border-radius:50%;margin:0 auto 26px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Playfair Display',serif;font-size:3.6rem;color:#fff;
+    background:linear-gradient(135deg,var(--purple-500),var(--purple-400),var(--lavender-300));
+    box-shadow:0 0 0 8px rgba(255,255,255,.7),0 15px 40px rgba(124,92,196,.35);
+  }
+  #home h1{
+    font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,5.5rem);line-height:1.1;
+    background:linear-gradient(135deg,var(--purple-800),var(--purple-500));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  #home .role{font-size:1.3rem;color:var(--purple-600);margin:10px 0 18px;font-weight:500}
+  #home p.lead{max-width:620px;margin:0 auto 34px;color:var(--muted);font-weight:300;font-size:1.05rem}
+  .btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    padding:13px 32px;border-radius:50px;font-weight:500;font-size:.95rem;transition:.3s;cursor:pointer;border:none;
+  }
+  .btn.primary{background:linear-gradient(135deg,var(--purple-600),var(--purple-400));color:#fff;box-shadow:0 8px 24px rgba(124,92,196,.35)}
+  .btn.primary:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(124,92,196,.45)}
+  .btn.ghost{background:rgba(255,255,255,.7);color:var(--purple-600);border:1.5px solid var(--lavender-300)}
+  .btn.ghost:hover{background:var(--lavender-100);transform:translateY(-3px)}
+
+  /* ABOUT */
+  .about-card{
+    max-width:820px;margin:auto;padding:46px;border-radius:var(--radius);
+    background:var(--card);backdrop-filter:blur(10px);box-shadow:var(--shadow);
+    border:1px solid rgba(255,255,255,.9);text-align:center;
+  }
+  .about-card p{font-size:1.1rem;color:var(--ink);font-weight:300}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px;max-width:820px;margin:34px auto 0}
+  .stat{
+    background:linear-gradient(135deg,#fff,var(--lavender-100));border-radius:18px;padding:22px;text-align:center;
+    box-shadow:var(--shadow);
+  }
+  .stat b{display:block;font-family:'Playfair Display',serif;font-size:1.9rem;color:var(--purple-600)}
+  .stat span{font-size:.85rem;color:var(--muted)}
+
+  /* TIMELINE */
+  .timeline{max-width:820px;margin:auto;position:relative;padding-left:34px}
+  .timeline::before{
+    content:"";position:absolute;left:8px;top:6px;bottom:6px;width:3px;border-radius:3px;
+    background:linear-gradient(var(--purple-400),var(--lavender-300));
+  }
+  .job{
+    position:relative;margin-bottom:30px;padding:30px;border-radius:var(--radius);
+    background:var(--card);backdrop-filter:blur(10px);box-shadow:var(--shadow);
+    border:1px solid rgba(255,255,255,.9);transition:.3s;
+  }
+  .job:hover{transform:translateX(6px)}
+  .job::before{
+    content:"";position:absolute;left:-34px;top:36px;width:17px;height:17px;border-radius:50%;
+    background:#fff;border:4px solid var(--purple-500);
+  }
+  .job .years{
+    display:inline-block;font-size:.78rem;font-weight:500;padding:4px 14px;border-radius:30px;
+    background:var(--lavender-200);color:var(--purple-600);margin-bottom:8px;
+  }
+  .job h3{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--purple-800)}
+  .job .org{color:var(--purple-500);font-weight:500;margin-bottom:12px}
+  .job ul{list-style:none}
+  .job li{padding-left:26px;position:relative;font-size:.95rem;color:var(--ink);font-weight:300;margin:6px 0}
+  .job li::before{content:"✦";position:absolute;left:0;color:var(--purple-400);font-size:.8rem;top:2px}
+
+  /* EDUCATION */
+  .edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px;max-width:900px;margin:auto}
+  .edu{
+    padding:32px;border-radius:var(--radius);background:var(--card);backdrop-filter:blur(10px);
+    box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.9);transition:.3s;
+  }
+  .edu:hover{transform:translateY(-6px)}
+  .edu .icon{font-size:2rem;margin-bottom:10px}
+  .edu .years{font-size:.8rem;color:var(--purple-500);font-weight:500;letter-spacing:.05em}
+  .edu h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--purple-800);margin:4px 0 8px}
+  .edu p{font-size:.95rem;color:var(--muted)}
+  .chip{
+    display:inline-block;margin:6px 6px 0 0;padding:5px 14px;border-radius:30px;font-size:.8rem;
+    background:var(--lavender-100);color:var(--purple-600);font-weight:500;
+  }
+
+  /* SKILLS */
+  .skills{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;max-width:860px;margin:auto}
+  .skill{
+    padding:12px 26px;border-radius:50px;font-size:.95rem;font-weight:400;
+    background:rgba(255,255,255,.8);border:1.5px solid var(--lavender-300);color:var(--purple-800);
+    box-shadow:0 4px 14px rgba(124,92,196,.1);transition:.3s;
+  }
+  .skill:hover{
+    background:linear-gradient(135deg,var(--purple-500),var(--purple-400));color:#fff;
+    transform:translateY(-4px);border-color:transparent;
+  }
+  .langs{text-align:center;margin-top:44px}
+  .langs h3{font-family:'Playfair Display',serif;color:var(--purple-800);margin-bottom:14px}
+
+  /* CONTACT */
+  .contact-wrap{
+    max-width:820px;margin:auto;padding:46px;border-radius:var(--radius);text-align:center;
+    background:linear-gradient(135deg,rgba(255,255,255,.85),rgba(230,220,251,.7));
+    box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.9);
+  }
+  .contact-wrap > p{color:var(--muted);margin-bottom:30px;font-weight:300}
+  .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+  .contact-item{
+    padding:22px 16px;border-radius:18px;background:#fff;box-shadow:0 6px 20px rgba(124,92,196,.12);transition:.3s;
+  }
+  .contact-item:hover{transform:translateY(-5px)}
+  .contact-item .ci{font-size:1.7rem}
+  .contact-item small{display:block;color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;margin-top:4px}
+  .contact-item span{font-weight:500;color:var(--purple-800);word-break:break-word;font-size:.95rem}
+
+  footer{position:relative;z-index:1;text-align:center;padding:30px;color:var(--muted);font-size:.85rem}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.show{opacity:1;transform:none}
+
+  @media(max-width:700px){
+    nav{width:92%;justify-content:space-between;padding:6px}
+    nav a{padding:7px 9px;font-size:.72rem}
+    section{padding:70px 6%}
+    .about-card,.contact-wrap{padding:30px 22px}
+  }
+</style>
+</head>
+<body>
+
+<div class="floaters" aria-hidden="true">
+  <span style="left:6%;top:15%;font-size:3rem">∑</span>
+  <span style="left:88%;top:12%;font-size:2.6rem;animation-delay:-3s">π</span>
+  <span style="left:12%;top:60%;font-size:3.4rem;animation-delay:-6s">∞</span>
+  <span style="left:80%;top:55%;font-size:3rem;animation-delay:-9s">√</span>
+  <span style="left:45%;top:8%;font-size:2.4rem;animation-delay:-12s">÷</span>
+  <span style="left:55%;top:85%;font-size:3rem;animation-delay:-4s">∫</span>
+  <span style="left:92%;top:85%;font-size:2.6rem;animation-delay:-8s">+</span>
+  <span style="left:3%;top:88%;font-size:2.8rem;animation-delay:-2s">=</span>
+</div>
+
+<nav>
+  <a href="#home" class="active">Home</a>
+  <a href="#about">About</a>
+  <a href="#experience">Experience</a>
+  <a href="#education">Education</a>
+  <a href="#skills">Skills</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="reveal">
+    <div class="avatar">N</div>
+    <span class="hero-badge">Hello, I'm</span>
+    <h1>Nagu</h1>
+    <p class="role">Mathematics Teacher</p>
+    <p class="lead">Dedicated and passionate teacher with strong subject knowledge, simplifying complex concepts and helping students achieve academic excellence.</p>
+    <div class="btns">
+      <a class="btn primary" href="#contact">Get in Touch</a>
+      <a class="btn ghost" href="#experience">View Experience</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2 class="title reveal">Career Objective</h2>
+  <div class="title-line"></div>
+  <div class="about-card reveal">
+    <p>Dedicated and passionate Mathematics Teacher with strong subject knowledge and teaching experience. Seeking a position to utilize my skills in simplifying complex concepts and helping students achieve academic excellence.</p>
+  </div>
+  <div class="stats reveal">
+    <div class="stat"><b>B.Tech</b><span>Information Technology</span></div>
+    <div class="stat"><b>7.1</b><span>CGPA · First Class</span></div>
+    <div class="stat"><b>3</b><span>Languages Spoken</span></div>
+    <div class="stat"><b>Grades 3–5</b><span>Maths Taught</span></div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <h2 class="title reveal">Work Experience</h2>
+  <div class="title-line"></div>
+  <div class="timeline">
+
+    <div class="job reveal">
+      <span class="years">2022 – 2023</span>
+      <h3>Mathematics Teacher</h3>
+      <div class="org">Sri Chaithanya Techno School</div>
+      <ul>
+        <li>Taught Mathematics for Classes 3–5.</li>
+        <li>Improved student performance through interactive teaching.</li>
+        <li>Prepared lesson plans and conducted assessments.</li>
+        <li>Used real-time examples to explain mathematical concepts.</li>
+        <li>Maintained classroom discipline and student engagement.</li>
+      </ul>
+    </div>
+
+    <div class="job reveal">
+      <span class="years">2019 – 2021</span>
+      <h3>Mathematics Teacher</h3>
+      <div class="org">Bhasyam Little Champs</div>
+      <ul>
+        <li>Taught Mathematics for Classes 3–5.</li>
+        <li>Improved student performance through interactive teaching.</li>
+        <li>Prepared lesson plans and conducted assessments.</li>
+        <li>Used real-time examples to explain mathematical concepts.</li>
+        <li>Maintained classroom discipline and student engagement.</li>
+      </ul>
+    </div>
+
+    <div class="job reveal">
+      <span class="years">2014 – 2015</span>
+      <h3>Billing Executive</h3>
+      <div class="org">RSRGGLV Indane Gas Agency</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <h2 class="title reveal">Education</h2>
+  <div class="title-line"></div>
+  <div class="edu-grid">
+    <div class="edu reveal">
+      <div class="icon">🎓</div>
+      <div class="years">2010 – 2014</div>
+      <h3>Trichy Engineering College</h3>
+      <p>B.Tech in Information Technology</p>
+      <span class="chip">7.1 CGPA</span><span class="chip">First Class</span>
+    </div>
+    <div class="edu reveal">
+      <div class="icon">📚</div>
+      <div class="years">2008 – 2010</div>
+      <h3>Sri Saraswathi Higher Secondary School</h3>
+      <p>Higher Secondary &amp; Secondary Education</p>
+      <span class="chip">HSE · 68%</span><span class="chip">SSLC · 85%</span>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <h2 class="title reveal">Skills</h2>
+  <div class="title-line"></div>
+  <div class="skills reveal">
+    <div class="skill">Customer Support</div>
+    <div class="skill">Email &amp; Chat Support</div>
+    <div class="skill">Active Listening</div>
+    <div class="skill">Good Communication</div>
+    <div class="skill">Problem Solving</div>
+    <div class="skill">MS Office Basics</div>
+    <div class="skill">Teamwork</div>
+    <div class="skill">Time Management</div>
+  </div>
+  <div class="langs reveal">
+    <h3>Languages</h3>
+    <span class="chip">Tamil</span><span class="chip">Telugu</span><span class="chip">English</span>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="title reveal">Contact Me</h2>
+  <div class="title-line"></div>
+  <div class="contact-wrap reveal">
+    <p>I'd love to hear from you. Reach out for teaching opportunities or any enquiries.</p>
+    <div class="contact-grid">
+      <a class="contact-item" href="tel:+919159912883">
+        <div class="ci">📞</div><small>Phone</small><span>+91 9159912883</span>
+      </a>
+      <a class="contact-item" href="mailto:tfred92@gmail.com">
+        <div class="ci">✉️</div><small>Email</small><span>tfred92@gmail.com</span>
+      </a>
+      <div class="contact-item">
+        <div class="ci">📍</div><small>Address</small><span>No.3/400, D Type Quarters, RSCL, Mundiyampakkam</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© <span id="yr"></span> Nagu · Mathematics Teacher</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // active nav link
+  const links = document.querySelectorAll('nav a');
+  const secs = [...links].map(a=>document.querySelector(a.getAttribute('href')));
+  window.addEventListener('scroll',()=>{
+    const y = window.scrollY + 200;
+    let idx = 0;
+    secs.forEach((s,i)=>{ if(s.offsetTop <= y) idx = i; });
+    links.forEach((a,i)=>a.classList.toggle('active', i===idx));
+  });
+</script>
+</body>
+</html>
